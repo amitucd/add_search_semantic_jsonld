@@ -1,0 +1,124 @@
+<html>
+<head>
+    <title>Search Items</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+    <div class="container">
+        
+        {% block content %}{% endblock %}
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+          const form = document.getElementById("form1");
+      
+          form.addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent the default form submission
+      
+            // Serialize the form data into a JSON object
+            const formData = new FormData(form);
+            const formDataObject = {};
+            formData.forEach((value, key) => {
+              formDataObject[key] = value;
+            });
+      
+            // Convert the JSON object to a string
+            const jsonData = JSON.stringify(formDataObject);
+      
+            // Make an API request using the JSON data
+            fetch("http://localhost:5050/search_images", {
+              method: "POST", // Use POST to send JSON data
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: jsonData,
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                // Handle the API response here
+                const newList = [];
+                console.log(data);
+                // Iterate over the original JSON list
+                for (const item of data) {
+                // Perform your transformations or conditions here
+                // For example, let's create a new object with only "name" and "age" properties
+                console.log(item);
+                const newItem = {
+                    name: item.name,
+                    description: item.description,
+                    link:item.url
+                };
+
+                // Add the new item to the new list
+                newList.push(newItem);
+                }
+                updateTable(newList);           });
+          });
+        });
+        function updateTable(data) {
+            const tableBody = $('#material-table tbody');
+            tableBody.empty();
+    
+            data.forEach(function(item) {
+                const row = $('<tr>');
+                const nameCell = $('<td>').text(item.name);
+                const descriptionCell = $('<td>').text(item.description);
+                const linkCell = $('<td>').append($('<a>').attr('href', item.link).text('Visit Link'));
+                row.append(nameCell, descriptionCell, linkCell);
+                tableBody.append(row);
+            });
+        };
+      </script>
+      <script>
+        document.addEventListener("DOMContentLoaded", function() {
+          const form = document.getElementById("form2");
+      
+          form.addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent the default form submission
+      
+            // Serialize the form data into a JSON object
+            const formData = new FormData(form);
+            const formDataObject = {};
+            formData.forEach((value, key) => {
+              formDataObject[key] = value;
+            });
+      
+            // Convert the JSON object to a string
+            const jsonData = JSON.stringify(formDataObject);
+      
+            // Make an API request using the JSON data
+            fetch("http://localhost:5050/add_ndi", {
+              method: "POST", // Use POST to send JSON data
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: jsonData,
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                // Handle the API response here
+                console.log(data);
+                if (data.status==true){
+                  swal({
+                        title: "Action Update!",
+                        text: "Record added Successfully!",
+                        icon: "success",
+                      });
+                } else{
+                  swal({
+                        title: "Action Update!",
+                        text: "Record was not added!",
+                        icon: "error",
+                      });
+                }
+                ;           });
+          });
+        });
+      </script>
+    
+      
+</body>
+</html>

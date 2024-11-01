@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h3 class="header">Search Docker Images</h3>
+<div class="row">
+<form method="post" class="col s12" name="form1" id="form1">
+    <div class="input-field col s6">
+        <input type="text" name="name" id="name" value="">
+        <label for="name">Name</label>
+    </div>
+
+    <div class="input-field col s6">
+        <input type="text" name="category" id="category" value="">
+        <label for="category">Category</label>
+    </div>
+    <div class="input-field col s6">
+        <input type="text" name="sub-type" id="sub-type" value="">
+        <label for="sub-type">Sub-Type</label>
+    </div>
+    <div class="input-field col s6">
+        <input type="text" name="tags" id="tags" value="">
+        <label for="tags">Tags</label>
+    </div>
+    <button class="btn waves-effect waves-light" type="submit">Search</button>
+</div>
+<div class="row" >
+    <table class="mdc-data-table" id="material-table">
+        <thead>
+            <tr>
+                <th class="mdc-data-table__header-cell">Name</th>
+                <th class="mdc-data-table__header-cell">Description</th>
+                <th class="mdc-data-table__header-cell">Link</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Table rows will be added here -->
+        </tbody>
+    </table>
+</div>
+</form>
+
+{% endblock %} 

@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h3 class="header">Add Docker Images</h3>
+<div class="row">
+<form method="post" class="col s12" name="form2" id="form2">
+    <div class="input-field col s6">
+        <input type="text" name="name" id="name" value="">
+        <label for="name">Name</label>
+    </div>
+    <div class="input-field col s6">
+        <input type="text" name="category" id="category" value="">
+        <label for="category">Category</label>
+    </div>
+    <div class="input-field col s6">
+        <input type="text" name="url" id="url" value="">
+        <label for="category">URL</label>
+    </div>
+    <div class="input-field col s6">
+        <input type="text" name="desc" id="desc" value="">
+        <label for="category">Description</label>
+    </div>
+    <div class="input-field col s6">
+        <input type="text" name="sub_type" id="sub_type" value="">
+        <label for="sub_type">Sub-Type</label>
+    </div>
+    <div class="input-field col s6">
+        <input type="text" name="tags" id="tags" value="">
+        <label for="tags">Tags</label>
+    </div>
+    <div class="input-field col s6">
+        <input type="text" name="req" id="req" value="">
+        <label for="tags">Requirements</label>
+    </div>
+
+    <button class="btn waves-effect waves-light" type="submit">Submit</button>
+</div>
+
+</form>
+
+{% endblock %} 
